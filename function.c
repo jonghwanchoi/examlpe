@@ -13,6 +13,17 @@ char getGrade(int score);   //점수 입력 및 학점 부여 프로그램
 void strExc_p(char* pa, char* pb); //문자열 복사
 void getAcend(int* num, int size); //오름차순 정렬
 
+int main(void)
+{
+    int* a;
+    int b, c;
+    a= &b;
+    printf("%d\n", a);
+    a= &c;
+    printf("%d", a);
+
+    return 0;
+}
 
 void match_func(int x) //매칭 시스템
 {
