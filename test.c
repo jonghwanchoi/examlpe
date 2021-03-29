@@ -1,42 +1,42 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-void getAcend(int* num, int size);
+void swap(char size[], int* a, int* b, int* c, int* d);
 
 int main(void)
 {
-    int num[10];
-    int i, count;
-    int fullSize = sizeof(num);
-    int oneSize = sizeof(num[0]);
-    count = fullSize / oneSize;
+    int x,y,z,w;
+    void(*fp)();
 
-    for(i=0; i<count; i++)
-    {
-        printf("숫자를 입력해주세요 : ");
-        scanf("%d", &num[i]);
-    }
+    printf("첫번째 사람 나이와 키 입력 : ");
+    scanf("%d %d", &x, &y);
+    getchar();
+    printf("두번째 사람 나이와 키 입력 : ");
+    scanf("%d %d", &z, &w);
+    fp = swap;
+    fp("double", &x, &y,&z, &w);
 
-    getAcend(num, count);
-    printf("최대값 : %d, 최소값 : %d", num[count-1], num[0]);
 
     return 0;
 }
 
-void getAcend(int* num, int size)
+void swap(char size[],int* a, int* b, int* c, int* d)
 {
-    int i, j, temp;
-     for(i=0; i<size; i++) //끝에서부터 최대값 저장
+    int* temp;
+    int* temp_1;
+    temp = a;
+    a=c;
+    c=temp;
+    temp_1 = b;
+    b=d;
+    d=temp_1;
+    if(size == "int") 
     {
-        for(j=0; j<size-i; j++) //0~5, 0~4...비교해서 저장
-        {
-            if(*(num+j)>*(num+j+1))
-            {
-                temp = *(num+j); //==num[j]
-                *(num+j) = *(num+j+1); //==num[j+1]
-                *(num+j+1) = temp;
-            }
-        }
+        printf("첫번째 사람 나이와 키 : %d, %d\n", *a, *b);
+        printf("두번째 사람 나이와 키 : %d, %d\n", *c, *d);
+    }
+    else 
+    {
+        printf("첫번째 사람 나이와 키 : %.1lf, %.1lf \n", (double)(*a), (double)(*b));
+        printf("두번째 사람 나이와 키 : %.1lf, %.1lf\n", (double)(*c), (double)(*d));
     }
     return;
 }
