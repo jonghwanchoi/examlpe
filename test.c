@@ -1,42 +1,68 @@
 #include <stdio.h>
-void swap(char size[], int* a, int* b, int* c, int* d);
+
+void getAcend(int* num, int size);
+void getDcend(int* num, int size);  
 
 int main(void)
 {
-    int x,y,z,w;
-    void(*fp)();
 
-    printf("첫번째 사람 나이와 키 입력 : ");
-    scanf("%d %d", &x, &y);
-    getchar();
-    printf("두번째 사람 나이와 키 입력 : ");
-    scanf("%d %d", &z, &w);
-    fp = swap;
-    fp("double", &x, &y,&z, &w);
+        int numArr[10] = {8, 4, 2, 5, 3, 7, 10, 1, 6, 9};
+        int size = sizeof(numArr)/ sizeof(numArr[0]);
+        int i;
+
+        getAcend(numArr, size);
+        printf("오름차순 정렬 : ");
+        for(i=0; i<size; i++)
+        {
+            printf("%5d", numArr[i]);
+        }
+
+        printf("\n");
+
+        getDcend(numArr, size);
+        printf("내림차순 정렬 : ");
+        for(i=0; i<size; i++)
+        {
+             printf("%5d", numArr[i]);
+        }
 
 
-    return 0;
+        return 0;
+
 }
 
-void swap(char size[],int* a, int* b, int* c, int* d)
+void getAcend(int* num, int size)  //오름차순 정렬 num[0] : 최소값, num[size-1] : 최대값
 {
-    int* temp;
-    int* temp_1;
-    temp = a;
-    a=c;
-    c=temp;
-    temp_1 = b;
-    b=d;
-    d=temp_1;
-    if(size == "int") 
+    int i, j, temp;
+     for(i=0; i<size; i++)
     {
-        printf("첫번째 사람 나이와 키 : %d, %d\n", *a, *b);
-        printf("두번째 사람 나이와 키 : %d, %d\n", *c, *d);
-    }
-    else 
-    {
-        printf("첫번째 사람 나이와 키 : %.1lf, %.1lf \n", (double)(*a), (double)(*b));
-        printf("두번째 사람 나이와 키 : %.1lf, %.1lf\n", (double)(*c), (double)(*d));
+        for(j=0; j<size-i; j++) //0~9, 0~8...비교해서 저장
+        {
+            if(*(num+j)>*(num+j+1))
+            {
+                temp = *(num+j); //==num[j]
+                *(num+j) = *(num+j+1); //==num[j+1]
+                *(num+j+1) = temp;
+            }
+        }
     }
     return;
+}
+
+void getDcend(int* num, int size) //내림차순 정렬 num[0] : 최대값, num[size-1] : 최소값
+{
+    int i, j, temp;
+    for(i=0; i<size; i++)
+    {
+         for(j=size-1; j>i; j--) //9~0, 9~1, 9~2...비교해서 저장
+        {
+            if(*(num+j)>*(num+j-1))
+            {
+                    temp = *(num+j);
+                *(num+j) = *(num+j-1);
+                *(num+j-1) = temp; 
+            } 
+        }
+    }
+        return;
 }
