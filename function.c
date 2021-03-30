@@ -11,7 +11,9 @@ void input_nums(int* lotto_nums); //직접 번호 입력(중복되면 이벤트 
 void print_nums(int* lotto_nums);  //번호 출력 // 포인터 변수 이용
 char getGrade(int score);   //점수 입력 및 학점 부여 프로그램
 void strExc_p(char* pa, char* pb); //문자열 복사
-void getAcend(int* num, int size); //오름차순 정렬
+void getAcend(int* num, int size); //오름차순 버블 정렬
+void getDcend(int* num, int count);//내림차순 버블 정렬
+void selectionSort(int* num, int count); // 오름차순 선택정렬
 
 void match_func(int x) //매칭 시스템
 {
@@ -185,7 +187,7 @@ void strExc_p(char* pa, char* pb) //문자열 복사, 포인터 사용
     return;
 }
 //------------------------------------------------------
-void getAcend(int* num, int size)  //오름차순 정렬 [0] : 최솟값, [size-1] : 최댓값
+void getAcend(int* num, int size)  //오름차순 버블 정렬 [0] : 최솟값, [size-1] : 최댓값
 {
     int i, j, temp;
      for(i=0; i<size; i++) //끝에서부터 최대값 저장
@@ -202,3 +204,46 @@ void getAcend(int* num, int size)  //오름차순 정렬 [0] : 최솟값, [size-
     }
     return;
 }
+//---------------------------------------------------------------------------------
+void getDcend(int* num, int count) //내림차순 버블정렬 num[0] : 최대값, num[count-1] : 최소값
+{
+    int i, j, temp; 
+    for(i=0; i<count; i++)
+    {
+         for(j=count-1; j>i; j--) //9~0, 9~1, 9~2...비교해서 저장
+        {
+            if(*(num+j)>*(num+j-1))
+            {
+                    temp = *(num+j);
+                *(num+j) = *(num+j-1);
+                *(num+j-1) = temp; 
+            } 
+        }
+    }
+        return;
+}
+//---------------------------------------------------------
+void selectionSort(int* num, int count) //기준 index 요소 값보다 제일 작은 요소 값을 찾아 서로 값을 교환
+{                                       //순차적으로 작은수가 앞으로 가게 되어있음
+    int i,j,s,temp;
+    for(i=0; i<count-1; i++) //비교 기준이 되는 현재 index값
+    {   
+        s = i; //i값에 영향을 주지않기 위해서 다른 변수(s)에 저장
+        for(j=i+1; j<count; j++)
+        {
+            if(num[j]<num[s]) //비교 기준이 되는 현재 index(s) 요소 값보다 작은 경우
+            {
+               s = j; //비교 기준이 되는 현재 index값(s)을  비교 당한 index값(j)으로 치환
+            }//다음 비교때 작은 요소 값을 가진 index(s)부터 비교 시작 & 마지막에 제일 작은 요소 값을 가진 index값(s)이 남게됨.
+        }
+
+        if(i != s) //최소값이 자기 자리일 경우 바꾸지 않는다.
+        {           //비교기준이 되는 index(i) 요소 값과 비교 당하는 index값 중에서 제일 작은 요소 값을
+                    //가진 index(s)와 요소 값 교환
+            temp = num[i];
+            num[i] = num[s];
+            num[s] = temp; 
+        }
+    }
+    return;
+} //-->오름차순 선택정렬
