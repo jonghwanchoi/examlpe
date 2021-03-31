@@ -13,7 +13,8 @@ char getGrade(int score);   //점수 입력 및 학점 부여 프로그램
 void strExc_p(char* pa, char* pb); //문자열 복사
 void getAcend(int* num, int size); //오름차순 버블 정렬
 void getDcend(int* num, int count);//내림차순 버블 정렬
-void selectionSort(int* num, int count); // 오름차순 선택정렬
+void selectionSort(int* num, int count); // 오름차순 선택 정렬
+void insertSort(int* num, int count); //오름차순 삽입 정렬
 
 void match_func(int x) //매칭 시스템
 {
@@ -247,3 +248,26 @@ void selectionSort(int* num, int count) //기준 index 요소 값보다 제일 �
     }
     return;
 } //-->오름차순 선택정렬
+//---------------------------------------
+void insertSort(int* num, int count) //오름차순 삽입 정렬
+{
+    int i, j ,temp;
+    
+    for(i=1; i<count; i++)
+    {
+        for(j=i; j<i+1; j--)
+        {
+            if((num[j-1]>num[j]) && (j>0))
+            {
+                temp =num[j-1];
+                num[j-1]= num[j];
+                num[j]= temp;
+            }
+            else if(j==0)
+            {
+                break;
+            }
+        }
+    }
+    return;
+}
