@@ -14,7 +14,10 @@ void strExc_p(char* pa, char* pb); //문자열 복사
 void getAcend(int* num, int size); //오름차순 버블 정렬
 void getDcend(int* num, int count);//내림차순 버블 정렬
 void selectionSort(int* num, int count); // 오름차순 선택 정렬
+<<<<<<< HEAD
 void insertSort(int* num, int count); //오름차순 삽입 정렬
+=======
+>>>>>>> 6160673dfb468ceeb39ded53cf2bb552bbd75669
 
 void match_func(int x) //매칭 시스템
 {
@@ -248,6 +251,7 @@ void selectionSort(int* num, int count) //기준 index 요소 값보다 제일 �
     }
     return;
 } //-->오름차순 선택정렬
+<<<<<<< HEAD
 //---------------------------------------
 void insertSort(int* num, int count) //오름차순 삽입 정렬
 {
@@ -271,3 +275,5 @@ void insertSort(int* num, int count) //오름차순 삽입 정렬
     }
     return;
 }
+=======
+>>>>>>> 6160673dfb468ceeb39ded53cf2bb552bbd75669
