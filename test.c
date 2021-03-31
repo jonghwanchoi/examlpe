@@ -179,11 +179,11 @@ int partition(int* num, int begin, int end)
 void heapSort(int* num, int count)
 {
     int i, j, temp;
-    int p, c;   //각각 부모(p), 자식(c) 노드 번호(index)를 나타내는 변수 선언
+    int p, c;   //부모(p), 자식(c) 노드 번호(index)를 나타내는 변수 선언
 
-   for(i=1; i<count; i++) //최대 힙 구하기
+   for(i=1; i<count; i++) //<최대 힙 구하기>
    {
-        c = i; // 자식 노드는 1번부터 시작
+        c = i; // 자식 노드는 index 1번부터 시작
         do
         {
             p = (c-1)/2; // 현재 자식 노드의 부모 노드 구하기
@@ -205,7 +205,7 @@ void heapSort(int* num, int count)
         num[i] = temp;
         for(j=1; j<i; j++) //최대 힙 구하기 반복(삭제된 마지막 노드-1 까지)
         {
-            c = j; // 자식 노드는 1번부터 시작
+            c = j; // 자식 노드는 index 1번부터 시작
             do
             {
                 p = (c-1)/2; // 현재 자식 노드의 부모 노드 구하기
