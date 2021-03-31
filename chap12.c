@@ -60,3 +60,4 @@ void get2DArray(int (*arr)[4], int row, int col, int* cp, int size)    // 2ì°¨ì›
     }
 	return;
 }
+
