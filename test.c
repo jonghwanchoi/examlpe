@@ -7,18 +7,22 @@ void insertSort(int* num, int count);
 void quickSort(int* num, int begin, int end);
 int partition(int* num, int begin, int end);
 void heapSort(int* num, int count);
+void merge(int* num, int m, int middle, int n);
+void mergeSort(int* num, int m, int n);
+
+int sorted[8]; //전연 변수 (병합 과정에서 임시로 저장할 배열 공간)
 
 int main(void)
 {
 
-        int numArr[8] = {69, 10, 30, 2, 16, 8, 30, 22};
+        int numArr[8] = {69, 10, 30, 2, 16, 8, 31, 22};
         int count = sizeof(numArr)/ sizeof(numArr[0]);
         int i;
 
         //insertSort(numArr, count);
-        //quickSort(numArr, 0, count-1);
-        heapSort(numArr, count);
-        printf("오름차순 힙 정렬 : ");
+        mergeSort(numArr, 0, count-1);
+        //heapSort(numArr, count);
+        printf("오름차순 병합 정렬 : ");
         for(i=0; i<count; i++)
         {
             printf("%5d", numArr[i]);
@@ -145,7 +149,7 @@ void quickSort(int* num, int begin, int end) // 0~count-1
     n = end;
 	if(m < n)
     {
-        p = partition(num, begin, end);
+        p = partition(num, begin, end); //두번째 돌때 R번째 인덱스 ->피벗
         quickSort(num, begin, p-1);
         quickSort(num, p+1, end);
     }
@@ -156,13 +160,13 @@ void quickSort(int* num, int begin, int end) // 0~count-1
 int partition(int* num, int begin, int end)
 {
     int pivot, L, R, temp;
-    pivot = (begin + end) / 2;
-    L=begin;
-    R=end;
+    pivot = begin;
+    L = pivot + 1;
+    R = end;
     while(L<R)
     {
-        while(num[L]<num[pivot] && L<R) L++;
-        while(num[R]>=num[pivot] && L<R) R--;
+        while(num[L]<num[pivot]) L++; //피봇보다 크지않으면 L이 오른쪽으로 이동
+        while(num[R]>num[pivot]) R--; //피봇보다 작지않으면 R이 왼쪽으로 이동
         if(L<R)
         {
             temp = num[L];
@@ -179,11 +183,11 @@ int partition(int* num, int begin, int end)
 void heapSort(int* num, int count)
 {
     int i, j, temp;
-    int p, c;   //각각 부모(p), 자식(c) 노드 번호(index)를 나타내는 변수 선언
+    int p, c;   // 부모(p), 자식(c) 노드 번호(index)를 나타내는 변수 선언
 
-   for(i=1; i<count; i++) //최대 힙 구하기
+   for(i=1; i<count; i++) //<최대 힙 구하기>
    {
-        c = i; // 자식 노드는 1번부터 시작
+        c = i; // 자식 노드는 index 1번부터 시작
         do
         {
             p = (c-1)/2; // 현재 자식 노드의 부모 노드 구하기
@@ -205,7 +209,7 @@ void heapSort(int* num, int count)
         num[i] = temp;
         for(j=1; j<i; j++) //최대 힙 구하기 반복(삭제된 마지막 노드-1 까지)
         {
-            c = j; // 자식 노드는 1번부터 시작
+            c = j; // 자식 노드는 index 1번부터 시작
             do
             {
                 p = (c-1)/2; // 현재 자식 노드의 부모 노드 구하기
@@ -221,4 +225,64 @@ void heapSort(int* num, int count)
         } 
    }  
    return;   
+}
+
+void merge(int* num, int m, int middle, int n) // 병합과정(2의 배수로 부분집합의 요소개수가 늘어남)
+{
+    int i = m; //배열 부분집합 1의 첫번쨰 index값
+    int j = middle + 1; //배열 부분집합 2의 첫번쨰 index값
+    int k = m; //임시 저장공간 index값
+    while(i<=middle && j<=n)
+    {
+        if(num[i]>num[j])
+        {
+            sorted[k]=num[j];
+            j++; 
+        }
+        else
+        {
+            sorted[k]=num[i];
+            i++; 
+        }
+        k++;
+    }
+
+    if(i>middle) //i쪽 부분집합이 먼저 정렬되었을 경우
+    {
+        for(; j<=n; j++)
+        {
+            sorted[k] = num[j];
+            k++;
+        }
+    }
+    else if(j>n) //j쪽 부분집합이 먼저 정렬되었을 경우
+    {
+        for(; i<=middle; i++)
+        {
+            sorted[k] = num[i];
+            k++;
+        }
+    }
+
+    for(k=0; k<=n; k++) // 임시저장 공간에 정렬된 것을 다시 원래의 배열 공간에 저장
+    {
+        num[k]=sorted[k];
+    }
+
+    return;
+}
+
+void mergeSort(int* num, int m, int n)
+{
+    int middle = (m + n)/2;
+    if(m<n)
+    {
+        mergeSort(num, m, middle);
+        mergeSort(num, middle+1, n);
+        merge(num, m, middle, n);
+        //병합을 처음 시작했을때 상태는 각각의 부분 집합이 요소 하나씩만 가지고 있을때
+        //먼저 나누고 합친다 (순서 주의 !!)
+    }
+
+    return;
 }
