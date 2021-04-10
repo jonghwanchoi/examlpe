@@ -1,10 +1,11 @@
+
+#ifndef FUNCTION_H
+#define FUNCTION_H
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
 
-#ifndef FUNCTION_H
-#define FUNCTION_H
 void match_func(int x); //매칭 시스템
 void divisor_func(int x); // 약수 구하기
 void GCD_func(int x, int y); // 최대 공약수 구하기

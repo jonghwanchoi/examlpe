@@ -183,7 +183,11 @@ int partition(int* num, int begin, int end)
 void heapSort(int* num, int count)
 {
     int i, j, temp;
+<<<<<<< HEAD
     int p, c;   // 부모(p), 자식(c) 노드 번호(index)를 나타내는 변수 선언
+=======
+    int p, c;   //부모(p), 자식(c) 노드 번호(index)를 나타내는 변수 선언
+>>>>>>> 0853e6736ea7cb3679f4abc6cfca9d1760d04894
 
    for(i=1; i<count; i++) //<최대 힙 구하기>
    {
@@ -226,6 +230,7 @@ void heapSort(int* num, int count)
    }  
    return;   
 }
+<<<<<<< HEAD
 
 void merge(int* num, int m, int middle, int n) // 병합과정(2의 배수로 부분집합의 요소개수가 늘어남)
 {
@@ -286,3 +291,5 @@ void mergeSort(int* num, int m, int n)
 
     return;
 }
+=======
+>>>>>>> 0853e6736ea7cb3679f4abc6cfca9d1760d04894
